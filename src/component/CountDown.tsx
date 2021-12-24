@@ -20,23 +20,25 @@ export const CountDownComponent: React.FC<Props> = ({
   const countDown = () => {
     if (time === 0) {
       onDone();
-      setTime(MAX_TIME);
+      reset();
     } else {
       setTime(time - 1);
     }
-  }
+  };
+  // Update counter every second
   useEffect(() => {
     const timer = setInterval(countDown, 1000);
     return () => {
       clearInterval(timer)}
   });
+  // Restart counter when 'nb' props change
   useEffect(() => {
     reset();
   }, [nb]);
   return (
     <Wrapper>
       <i className="fas fa-stopwatch fa-3x"></i>
-      <p id='counter'>{time}</p>
+      <p id='counter'>{time}s</p>
     </Wrapper>
   )
 }
